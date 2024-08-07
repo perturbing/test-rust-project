@@ -27,10 +27,10 @@
           nativeBuildInputs = [ toolchain.cbindgen ];
           installPhase = ''
             mkdir -p $out/lib
-            cbindgen --crate rust_to_c --output $out/include/rust_to_c.h
-            cp target/release/lib*.so $out/lib/ || true
-            cp target/release/lib*.dylib $out/lib/ || true
-            cp target/release/lib*.dll $out/lib/ || true
+            cbindgen --crate rust_to_c --output $out/include/libmyrust.h
+            cp target/release/librust_to_c.so $out/lib/libmyrust.so || true
+            cp target/release/librust_to_c.dylib $out/lib/libmyrust.dylib || true
+            cp target/release/librust_to_c.dll $out/lib/libmyrust.dll || true
           '';
         };
 
@@ -43,21 +43,21 @@
 
           installPhase = ''
             mkdir -p $out/lib
-            if [ -f $src/lib/librust_to_c.so ]; then
-              cp $src/lib/librust_to_c.so $out/lib/
+            if [ -f $src/lib/libmyrust.so ]; then
+              cp $src/lib/libmyrust.so $out/lib/
             fi
-            if [ -f $src/lib/librust_to_c.dylib ]; then
-              cp $src/lib/librust_to_c.dylib $out/lib/
+            if [ -f $src/lib/libmyrust.dylib ]; then
+              cp $src/lib/libmyrust.dylib $out/lib/
             fi
-            if [ -f $src/lib/librust_to_c.dll ]; then
-              cp $src/lib/librust_to_c.dll $out/lib/
+            if [ -f $src/lib/libmyrust.dll ]; then
+              cp $src/lib/libmyrust.dll $out/lib/
             fi
             mkdir -p $out/include
-            cp $src/include/rust_to_c.h $out/include/
+            cp $src/include/libmyrust.h $out/include/
 
             # Adding pkg-config support
             mkdir -p $out/lib/pkgconfig
-            cat <<EOF > $out/lib/pkgconfig/librust_to_c.pc
+            cat <<EOF > $out/lib/pkgconfig/libmyrust.pc
             prefix=$out
             exec_prefix=''\\''${prefix}
             libdir=''\\''${exec_prefix}/lib
