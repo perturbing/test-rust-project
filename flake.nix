@@ -35,7 +35,7 @@
         };
 
         cLibrary = pkgs.stdenv.mkDerivation {
-          name = "libmyrustc";
+          name = "libmyrust";
           version = "1.0";
           src = cargoProject;
 
@@ -63,7 +63,7 @@
             libdir=''\\''${exec_prefix}/lib
             includedir=''\\''${prefix}/include
 
-            Name: libmyrustc
+            Name: libmyrust
             Description: Library generated from Rust code
             Version: 1.0
 
