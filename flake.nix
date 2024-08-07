@@ -63,7 +63,7 @@
             libdir=''\\''${exec_prefix}/lib
             includedir=''\\''${prefix}/include
 
-            Name: librust_to_c
+            Name: libmyrustc
             Description: Library generated from Rust code
             Version: 1.0
 
