@@ -8,3 +8,6 @@ name = "rust_to_c"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
+blstrs = "0.7.1" 
+ff = "0.13"
+group = "0.13"

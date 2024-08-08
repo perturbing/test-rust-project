@@ -1,4 +1,6 @@
+use blstrs::Scalar;
+
 #[no_mangle]
-pub extern "C" fn add(a: i32, b: i32) -> i32 {
-    a + b + 5
+pub extern "C" fn double(a: Scalar) -> Scalar {
+    return a + a
 }
