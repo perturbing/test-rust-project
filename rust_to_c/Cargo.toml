@@ -11,3 +11,4 @@ crate-type = ["cdylib", "rlib"]
 blstrs = "0.7.1" 
 ff = "0.13"
 group = "0.13"
+rand = "0.8"
