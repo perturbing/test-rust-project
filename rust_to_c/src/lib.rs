@@ -4,14 +4,20 @@ use rand::thread_rng;
 
 #[no_mangle]
 pub extern "C" fn random_scalar(a: *const Scalar) -> Scalar {
-    println!("a: {:?}", a);
-    if !a.is_null() {
-        println!("input not null");
+    if a.is_null() {
+        println!("Received null pointer!");
+        // Handle the null case, perhaps by returning a default value or by error handling
+        return Scalar::zero(); // Returning a default scalar, you might choose to handle it differently
     } else {
-        println!("input is null");
+        unsafe {
+            // Dereference the pointer to inspect the Scalar
+            let scalar_value = *a;
+            println!("Received scalar: {:?}", scalar_value);
+        }
     }
+
     let mut rng = thread_rng();
     let b = Scalar::random(&mut rng);
-    println!("b: {:?}", b);
+    println!("Generated random scalar: {:?}", b);
     return b;
 }
