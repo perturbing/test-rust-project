@@ -3,7 +3,7 @@ use ff::Field;
 use rand::thread_rng;
 
 #[no_mangle]
-pub extern "C" fn random_scalar(a: *mut Scalar) -> Scalar {
+pub extern "C" fn random_scalar(a: *const Scalar) -> Scalar {
     println!("a: {:?}", a);
     if !a.is_null() {
         println!("input not null");
