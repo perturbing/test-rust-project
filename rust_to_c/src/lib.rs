@@ -7,7 +7,7 @@ pub extern "C" fn random_scalar(a: *const Scalar) -> Scalar {
     if a.is_null() {
         println!("Received null pointer!");
         // Handle the null case, perhaps by returning a default value or by error handling
-        return Scalar::zero(); // Returning a default scalar, you might choose to handle it differently
+        return Scalar::ZERO; // Returning a default scalar, you might choose to handle it differently
     } else {
         unsafe {
             // Dereference the pointer to inspect the Scalar
