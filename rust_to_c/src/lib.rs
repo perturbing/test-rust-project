@@ -1,16 +1,14 @@
-use std::mem::transmute;
 use blstrs::Scalar;
 use ff::Field;
 use rand::thread_rng;
 
 #[no_mangle]
 pub extern "C" fn random_scalar(a: *mut Scalar) -> Scalar {
-    let ptr_as_usize: usize = unsafe { transmute(a) };
-    println!("Pointer as usize: {:#x}", ptr_as_usize);
+    println!("Pointer address received in Rust: {:p}", a);
 
     if a.is_null() {
         println!("Received null pointer!");
-        return Scalar::ZERO;
+        return Scalar::ZERO; 
     } else {
         unsafe {
             let scalar_value = *a;
