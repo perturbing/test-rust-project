@@ -3,7 +3,10 @@ use ff::Field;
 use rand::thread_rng;
 
 #[no_mangle]
-pub extern "C" fn random_scalar(a: *const Scalar) -> Scalar {
+pub extern "C" fn random_scalar(a: *mut Scalar) -> Scalar {
+    // Log the pointer address Rust is receiving for 'a'
+    println!("Pointer address received in Rust: {:?}", a);
+
     if a.is_null() {
         println!("Received null pointer!");
         // Handle the null case, perhaps by returning a default value or by error handling
