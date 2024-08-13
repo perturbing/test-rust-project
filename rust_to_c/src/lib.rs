@@ -3,7 +3,7 @@ use ff::Field;
 use rand::thread_rng;
 
 #[no_mangle]
-pub extern "C" fn random_scalar(a: *mut Scalar) -> Scalar {
+pub extern "C" fn random_scalar(a: *mut u8) -> Scalar {
     println!("Pointer address received in Rust: {:p}", a);
 
     if a.is_null() {
