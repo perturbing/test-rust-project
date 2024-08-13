@@ -27,7 +27,7 @@
           nativeBuildInputs = [ toolchain.cbindgen ];
           installPhase = ''
             mkdir -p $out/lib
-            cbindgen --crate rust_to_c --output $out/include/rust_to_c.h
+            cbindgen --crate rust_to_c --output $out/include/rust_to_c.h --lang c
             cp target/release/lib*.so $out/lib/ || true
             cp target/release/lib*.dylib $out/lib/ || true
             cp target/release/lib*.dll $out/lib/ || true
