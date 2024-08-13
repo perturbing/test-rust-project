@@ -5,7 +5,7 @@ edition = "2018"
 
 [lib]
 name = "rust_to_c"
-crate-type = ["cdylib", "rlib"]
+crate-type = ["cdylib"]
 
 [dependencies]
 blstrs = "0.7.1" 
