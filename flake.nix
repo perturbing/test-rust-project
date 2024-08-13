@@ -14,8 +14,8 @@
         pkgs = import nixpkgs { inherit system; };
 
         toolchain = with fenix.packages.${system}; {
-          rustc = latest.rustc;
-          cargo = latest.cargo;
+          rustc = stable.rustc;
+          cargo = stable.cargo;
           cbindgen = pkgs.rust-cbindgen;
         };
 
