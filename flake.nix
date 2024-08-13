@@ -27,11 +27,37 @@
           nativeBuildInputs = [ toolchain.cbindgen ];
           installPhase = ''
             mkdir -p $out/lib
-            cbindgen --crate rust_to_c --output $out/include/rust_to_c.h --lang c
+            # cbindgen --crate rust_to_c --output $out/include/rust_to_c.h --lang c
+
             cp target/release/lib*.so $out/lib/ || true
             cp target/release/lib*.dylib $out/lib/ || true
             cp target/release/lib*.dll $out/lib/ || true
-          '';
+
+
+            mkdir -p $out/include
+            cat > $out/include/rust_to_c.h <<'EOF'
+              #include <stdarg.h>
+              #include <stdbool.h>
+              #include <stdint.h>
+              #include <stdlib.h>
+
+              // Define the limb_t type in C, which corresponds to u64 in Rust
+              typedef uint64_t limb_t;
+
+              // Define the blst_fr structure as it is in Rust
+              typedef struct {
+                limb_t l[4];
+              } blst_fr;
+
+              // Define the Scalar structure as it is in Rust
+              typedef struct {
+                blst_fr inner;
+              } Scalar;
+
+              // Function prototype
+              Scalar random_scalar(Scalar *a);
+              EOF
+              '';
         };
 
         cLibrary = pkgs.stdenv.mkDerivation {
