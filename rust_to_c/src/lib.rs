@@ -2,10 +2,8 @@ use blstrs::Scalar;
 use ff::Field;
 use rand::thread_rng;
 
-type ScalarPtr = *mut Scalar;
-
 #[no_mangle]
-pub extern "C" fn random_scalar(a: *mut ScalarPtr) -> Scalar {
+pub extern "C" fn random_scalar(a: *mut Scalar) -> Scalar {
     println!("Pointer address received in Rust: {:p}", a);
 
     if a.is_null() {
