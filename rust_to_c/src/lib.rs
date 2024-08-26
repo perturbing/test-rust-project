@@ -7,6 +7,7 @@ pub extern "C" fn random_scalar(a: *mut Scalar) {
     println!("Pointer address received in Rust: {:p}", a);
 
     if !a.is_null() {
+        println!("Received scalar in Rust: {:?}", unsafe { *a });
         let mut rng = thread_rng();
         unsafe {
             *a = Scalar::random(&mut rng);
