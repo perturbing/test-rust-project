@@ -37,6 +37,7 @@
             mkdir -p $out/include
             cat > $out/include/rust_to_c.h <<'EOF'
             #include "blst.h"
+            #include <stddef.h>
 
             // Define the Scalar structure as it is in Rust
             typedef struct {
@@ -44,7 +45,7 @@
             } Scalar;
 
             // Function prototype
-            void random_scalar(Scalar *a);
+            void random_scalar(Scalar *a, size_t len);
             EOF
               '';
         };

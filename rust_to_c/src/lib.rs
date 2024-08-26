@@ -1,17 +1,21 @@
 use blstrs::Scalar;
 use ff::Field;
 use rand::thread_rng;
+use std::slice;
 
 #[no_mangle]
-pub extern "C" fn random_scalar(a: *mut Scalar) {
-    println!("Pointer address received in Rust: {:p}", a);
+pub extern "C" fn random_scalar_list(scalars_ptr: *mut Scalar, len: usize) {
+    println!("Pointer address received in Rust: {:p}", scalars_ptr);
 
-    if !a.is_null() {
-        println!("Received scalar in Rust: {:?}", unsafe { *a });
+    if !scalars_ptr.is_null() {
+        // Convert the raw pointer to a mutable slice
+        let scalars: &mut [Scalar] = unsafe { slice::from_raw_parts_mut(scalars_ptr, len) };
         let mut rng = thread_rng();
-        unsafe {
-            *a = Scalar::random(&mut rng);
-            println!("Modified the scalar in place: {:?}", *a);
+
+        // Modify each scalar in the slice
+        for scalar in scalars.iter_mut() {
+            *scalar = Scalar::random(&mut rng);
+            println!("Modified scalar: {:?}", scalar);
         }
     } else {
         println!("Received null pointer!");
