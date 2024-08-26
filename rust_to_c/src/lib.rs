@@ -10,6 +10,10 @@ pub extern "C" fn random_scalar_list(scalars_ptr: *mut Scalar, len: usize) {
     if !scalars_ptr.is_null() {
         // Convert the raw pointer to a mutable slice
         let scalars: &mut [Scalar] = unsafe { slice::from_raw_parts_mut(scalars_ptr, len) };
+        for scalar in scalars.iter_mut() {
+            println!("Received scalar: {:?}", scalar);
+        }
+        
         let mut rng = thread_rng();
 
         // Modify each scalar in the slice
