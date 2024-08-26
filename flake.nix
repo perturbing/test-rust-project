@@ -44,7 +44,7 @@
             } Scalar;
 
             // Function prototype
-            Scalar random_scalar(Scalar *a);
+            void random_scalar(Scalar *a);
             EOF
               '';
         };

@@ -3,17 +3,16 @@ use ff::Field;
 use rand::thread_rng;
 
 #[no_mangle]
-pub extern "C" fn random_scalar(a: *mut Scalar) -> Scalar {
+pub extern "C" fn random_scalar(a: *mut Scalar) {
     println!("Pointer address received in Rust: {:p}", a);
 
-    if a.is_null() {
-        println!("Received null pointer!");
+    if !a.is_null() {
+        let mut rng = thread_rng();
+        unsafe {
+            *a = Scalar::random(&mut rng);
+            println!("Modified the scalar in place: {:?}", *a);
+        }
     } else {
-        println!("input is: {:?}", a);
+        println!("Received null pointer!");
     }
-
-    let mut rng = thread_rng();
-    let b = Scalar::random(&mut rng);
-    println!("Generated random scalar: {:?}", b);
-    return b;
 }
